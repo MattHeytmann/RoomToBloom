@@ -1,0 +1,159 @@
+{% extends "index.html" %}
+
+{% block title %}home{% endblock title %}
+
+{% block content %}
+
+<main>
+
+    <span class="material-symbols-outlined subject_option" onclick="dropAll(['subject_list', 'options'])">
+        add
+    </span>
+
+    <span class="material-symbols-outlined subject_option back_option">
+        <a href="{% url 'class_detail' class.subject_id %}">
+            arrow_back
+        </a>
+    </span>
+    <span class="material-symbols-outlined subject_option edit_option" onclick="dropSubject('edit_note')">
+        edit_note
+    </span>
+
+    <div class="options class_options">
+        <a href="#" class="option option1" onclick="dropSubject('create_question_down_dropper')">
+            <span class="material-symbols-outlined">
+                add
+            </span>
+            <p>Add Question</p>
+        </a>
+        <a href="#" class="option option2" onclick="appier('delete_section')">
+            <span class="material-symbols-outlined">
+                settings
+            </span>
+            <p>Edit questions</p>
+        </a>
+    </div>
+    <div class="subject_list">
+
+        <a class="no_big option" style="transform: none;">
+            <span>
+                <h1>{{ note.title|truncatechars:30 }}</h1>
+            </span>
+            <hr class="note_hr">
+            <p class="justify note_content">{{ note.content }}</p>
+        </a>
+
+        {% if questions|length == 0 %}
+            <a class="subject"><h1>No questions</h1></a>
+        {% endif %}
+        
+        {% for question in questions %}
+        <div class="create_section_form edit_question_form more_up form{{ question.subject_id }}">
+            <form method="post">
+    
+                {% csrf_token %}
+            
+                <h1>Edit question</h1>
+                
+                <input type="hidden" name="update_question" value="1">
+                <input type="hidden" name="{{ question.subject_id }}" value="1">
+                <input type="text" name="question" placeholder="Question" required minlength="1" value="{{ question.title }}">
+                <p class="question_p">to do more answers devide answers with &lt;next&gt; ( dog &lt;next&gt; cat) or if answer must include word write &lt;include&gt; WORD &lt;/include&gt; ( &lt;include&gt; dog &lt;/include&gt; ) <br> it is recomended to not combine those two options</p>
+                <textarea name="answer" placeholder="Answer" id="" cols="30" rows="10" required>{{ question.answer }}</textarea>
+                <div class="question_option">
+                    <label for="case"> is case strict: (London ≠ london)</label>
+                    <input type="checkbox" name="case" checked>
+                </div>
+                <div class="question_option">
+                    <label for="dia"> is diacritic strict: (á ≠ a)</label>
+                    <input type="checkbox" name="dia" checked>
+                </div>
+                <div class="question_option">
+                    <label for="sym"> symbols are strict: (., +, -, ...) not ", "</label>
+                    <input type="checkbox" name="sym" checked>
+                </div>
+                <div class="question_option">
+                    <label for="mashed"> answer can be mashed: (dog, cat = dogcat = dog cat)</label>
+                    <input type="checkbox" name="mashed" checked>
+                </div>
+                
+                <div class="btns">
+                    <button type="button" class="closebtn" onclick="drop_to_zero('form{{ question.subject_id }}')">Close</button>
+                    <button type="submit" value="create">Update</button>
+                </div>
+            </form>
+        </div>
+        <a class="subject" style="transform: none;">
+            <h1>{{ question.title|truncatechars:20 }}</h1>
+            <p class="edit_answer">{{ question.answer|truncatechars:50 }}</p>
+        </a>
+        <a href="{% url 'deleteQuestion' question.subject_id %}" class="delete_section">
+            <span class="material-symbols-outlined">
+                delete
+            </span>
+        </a>
+        <a class="delete_section edit_question" onclick="drop_to_zero('form{{ question.subject_id }}')" style="cursor: pointer;">
+            <span class="material-symbols-outlined">
+                edit_note
+            </span>
+        </a>
+        
+        {% endfor %}
+
+    </div>
+    <div class="create_section_form more_up create_question_down_dropper">
+        <form method="post">
+
+            {% csrf_token %}
+        
+            <h1>Create question</h1>
+        
+            <input type="text" name="question" placeholder="Question" required minlength="1">
+            <p class="question_p">to do more answers devide answers with &lt;next&gt; ( dog &lt;next&gt; cat) or if answer must include word write &lt;include&gt; WORD &lt;/include&gt; ( &lt;include&gt; dog &lt;/include&gt; ) <br> it is recomended to not combine those two options</p>
+            <textarea name="answer" placeholder="Answer" id="" cols="30" rows="10" required></textarea>
+            <div class="question_option">
+                <label for="case"> is case strict: (London ≠ london)</label>
+                <input type="checkbox" name="case" checked>
+            </div>
+            <div class="question_option">
+                <label for="dia"> is diacritic strict: (á ≠ a)</label>
+                <input type="checkbox" name="dia" checked>
+            </div>
+            <div class="question_option">
+                <label for="sym"> symbols are strict: (., +, -, ...) not ", "</label>
+                <input type="checkbox" name="sym" checked>
+            </div>
+            <div class="question_option">
+                <label for="mashed"> answer can be mashed: (dog, cat = dogcat = dog cat)</label>
+                <input type="checkbox" name="mashed" checked>
+            </div>
+            
+            <div class="btns">
+                <button type="button" class="closebtn" onclick="dropSubject('create_question_down_dropper')">Close</button>
+                <button type="submit" value="create">Create</button>
+            </div>
+        </form>
+    </div>
+    
+    <div class="create_section_form edit_note">
+        <form method="post">
+
+            {% csrf_token %}
+        
+            <h1>Edit Note</h1>
+        
+            <input type="hidden" name="update_note" value="1">
+            <input type="text" name="title" placeholder="Title" required minlength="1" value="{{ note.title }}">
+            <textarea name="content" placeholder="Write something..." id="" cols="30" rows="10" required>{{ note.content }}</textarea>
+            
+            <div class="btns">
+                <button type="button" class="closebtn" onclick="dropSubject('edit_note')">Close</button>
+                <button type="submit" value="ubdate">update</button>
+            </div>
+        </form>
+    </div>
+    
+</main>
+
+{% endblock content %}
+

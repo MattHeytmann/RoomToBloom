@@ -1,0 +1,36 @@
+{% extends "index.html" %}
+
+{% block title %}home{% endblock title %}
+
+{% block content %}
+
+<main>
+    <h1>Tests</h1>
+
+    <p>pick one and learn!</p>
+
+    <div class="subject_list down_test">
+
+        <a href="{% url 'create_test' 'flash_cards'%}" class="subject">
+            <h1>Flash cards</h1>
+            <p class="editP">Best for languages</p>
+            <p class="editP">Answer question and learn!</p>
+        </a>
+
+        <a href="{% url 'create_test' 'practice_test'%}" class="subject">
+            <h1>Peractice test</h1>
+            <p class="editP">Immediately shows result</p>
+            <p class="editP">(easier "Test")</p>
+        </a>
+
+        <a href="{% url 'create_test' 'test'%}" class="subject">
+            <h1>Test</h1>
+            <p class="editP">Results re visible only at the end</p>
+            <p class="editP">Test your knowlage</p>
+        </a>
+
+    </div>
+</main>
+
+{% endblock content %}
+

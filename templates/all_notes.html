@@ -1,0 +1,31 @@
+{% extends "index.html" %}
+
+{% block title %}home{% endblock title %}
+
+{% block content %}
+
+<main>
+    <h1>Notes</h1>
+
+    <p>all notes at one place</p>
+
+    <div class="subject_list down">
+
+        {% if notes|length == 0 %}
+            <a class="subject"><h1>Empty</h1></a>
+        {% endif %}
+        
+        {% for note in notes %}
+        <a href="{% url 'note_detail' note.subject_id %}" class="subject">
+            <p class="date">{{ note.created_at|date:'d-m-Y' }}</p>
+            <h1>{{ note.title|truncatechars:20 }}</h1>
+            <p class="editP">{{ note.content|truncatechars:50 }}</p>
+        </a>
+        
+        {% endfor %}
+
+    </div>
+</main>
+
+{% endblock content %}
+

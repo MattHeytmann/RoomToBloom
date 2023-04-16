@@ -1,0 +1,62 @@
+{% extends "index.html" %}
+
+{% block title %}home{% endblock title %}
+
+{% block content %}
+
+<main>
+
+    <h1>Create 
+    {% if type == 'flash_cards' %}
+    Flash cards
+
+    {% elif type == 'practice_test' %}
+    Practice test
+
+    {% elif type == 'test' %}
+    Test
+
+    {% endif %}
+    </h1>
+
+    <p>pick from which notes will the test be:</p>
+
+    <span class="material-symbols-outlined subject_option">
+        <a href="{% url 'tests' %}">
+            arrow_back
+        </a>
+    </span>
+
+    {% if notes|length == 0 %}
+    <div class="subject_list down">
+        <a class="subject"><h1>Empty</h1></a>
+    </div>
+    {% endif %}
+
+    <form  method="post" class="subject_list down test_form">
+
+        {% csrf_token %}
+        
+        {% for note in notes %}
+        <a class="subject"  style="transform: none;">
+            <p class="date">{{ note.created_at|date:'d-m-Y' }}</p>
+            <h1>{{ note.title|truncatechars:20 }}</h1>
+            <p class="editP">{{ note.content|truncatechars:50 }}</p>
+            <div class="question_option">
+                <label for="test">include in test</label>
+                <input type="checkbox" name="test{{ forloop.counter }}" {% if note.test %}checked{% else %} {% endif %}>
+            </div>
+        </a>
+        
+        {% endfor %}
+
+        <div class="subject">
+            <button type="submit" value="createTest">Create test</button>
+        </div>
+
+        
+
+    </form>
+</main>
+
+{% endblock content %}

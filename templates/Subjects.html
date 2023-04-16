@@ -1,0 +1,74 @@
+{% extends "index.html" %}
+
+{% block title %}home{% endblock title %}
+
+{% block content %}
+
+<main>
+    <h1>{{ subject.title|truncatechars:30 }}</h1>
+
+    <p>{{ subject.description|truncatechars:50 }}</p>
+
+    <span class="material-symbols-outlined subject_option" onclick="dropAll(['subject_list', 'options'])">
+        add
+    </span>
+
+    <span class="material-symbols-outlined subject_option back_option" onclick="dropAll(['subject_list', 'options'])">
+        <a href="{% url 'subject' %}">
+            arrow_back
+        </a>
+    </span>
+
+    <div class="options class_options">
+        <a href="#" class="option option1" onclick="dropSubject('create_section_form')">
+            <span class="material-symbols-outlined">
+                add
+            </span>
+            <p>Add Class</p>
+        </a>
+        <a href="#" class="option option2" onclick="appier('delete_section')">
+            <span class="material-symbols-outlined">
+                delete
+            </span>
+            <p>Delete Class</p>
+        </a>
+    </div>
+    <div class="subject_list">
+
+        {% if classes|length == 0 %}
+            <a class="subject"><h1>Empty</h1></a>
+        {% endif %}
+        
+        {% for clas in classes %}
+        <a href="{% url 'class_detail' clas.subject_id %}" class="subject">
+            <h1>{{ clas.title|truncatechars:20 }}</h1>
+            <p>{{ clas.description|truncatechars:50 }}</p>
+        </a>
+        <a href="{% url 'deleteClass' clas.subject_id %}" class="delete_section">
+            <span class="material-symbols-outlined">
+                delete
+            </span>
+        </a>
+        
+        {% endfor %}
+
+    </div>
+    <div class="create_section_form">
+        <form method="post">
+
+            {% csrf_token %}
+        
+            <h1>Create Class</h1>
+        
+            <input type="text" name="title" placeholder="Title" required minlength="1">
+            <input type="text" name="description" placeholder="Description" required>
+            <div class="btns">
+                <button type="button" class="closebtn" onclick="dropSubject('create_section_form')">Close</button>
+                <button type="submit" value="create">Create</button>
+            </div>
+        </form>
+    </div>
+</main>
+
+{% endblock content %}
+

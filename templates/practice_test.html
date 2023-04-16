@@ -1,0 +1,55 @@
+{% extends "index.html" %}
+
+{% block title %}home{% endblock title %}
+
+{% block content %}
+
+<main>
+    <h1>Practice test</h1>
+
+    <p>answer question and see if you are correct</p>
+
+    <span class="material-symbols-outlined subject_option">
+        <a href="{% url 'create_test' type %}">
+            arrow_back
+        </a>
+    </span>
+    <span class="material-symbols-outlined subject_option back_option">
+        <a href="{% url 'test' type %}">
+            refresh
+        </a>
+    </span>
+
+    <div class="subject_list down">
+
+        {% if notes|length == 0 %}
+            <a class="subject"><h1>Empty</h1></a>
+        {% endif %}
+        
+        {% for question in questions %}
+        <a class="subject test_card" style="transform: none; background-color: #00000000;">
+            <div class="content">
+                <form class="front">
+                    <h1>{{ question.title }}</h1>
+                    <input type="text" class="test_input" required>
+                    <input type="submit" value="Check" class="test_input_check" onclick="openTestQuestion('{{ forloop.counter }}', ['{{ question.case_strict }}','{{ question.diacritic_strict }}','{{ question.symbol_strict }}','{{ question.can_be_mashed }}' ], '{{ question.answer }}')">
+                </form>
+                <div class="back">
+                    <p>{{ question.title }}</p>
+                    <h1 class="correct_message">Message</h1>
+                    <p>correct:</p>
+                    <h3 class="edit_answer correct">{{ question.answer }}</h3>
+                    <p>your answer:</p>
+                    <h3 class="correct_answer"> correct</h3>
+                    
+                </div>
+            </div>
+            
+        </a>       
+        {% endfor %}
+
+    </div>
+</main>
+
+{% endblock content %}
+

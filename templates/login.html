@@ -1,0 +1,38 @@
+{% extends "index.html" %}
+
+{% block title %}log-in{% endblock title %}
+
+{% block content %}
+
+
+<form method="post" class="log_in_form">
+
+    {% csrf_token %}
+
+    <div class="log_in_div">
+        
+        <span class="material-symbols-outlined">
+            emoji_nature
+        </span>
+        
+        <p>Welcome to Room to Bloom!</p>
+        <h1>Log-in</h1>
+
+        <input type="email" name="email" placeholder="E-mail" required>
+        <input type="password" name="password" placeholder="Passsword" required>
+        <a href="#" class="forgotten_password">Forgotten password</a>
+        <p>
+            {% if warning %}
+                {{ warning }}
+            {% else %}
+                &nbsp;
+            {% endif %}
+        </p>
+
+        <button type="submit" value="login">Log-in</button>
+    </div>
+
+</form>
+
+{% endblock content %}
+

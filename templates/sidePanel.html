@@ -1,0 +1,92 @@
+<nav>
+    <span class="material-symbols-outlined burger" onclick="dropdown()">
+        menu
+    </span>
+
+    <a href="#" class="user">
+        <span class="material-symbols-outlined">
+            account_circle
+        </span>
+        <h1>{{ user|truncatechars:12 }}</h1>
+    </a>
+    <div class="log_out_user">
+        <a href="{% url 'logout' %}" class="log_out">Log-out</a>
+    </div>
+    <div class="nav_options">
+        <hr>
+        <h1>What to do?</h1>
+        <a href="{% url 'subject' %}" class="nav_option">
+            <span class="material-symbols-outlined">
+                school
+            </span>
+            <p>Subjects</p>
+        </a>
+        <a href="{% url 'tests' %}" class="nav_option">
+            <span class="material-symbols-outlined">
+                quiz
+            </span>
+            <p>Tests</p>
+        </a>
+        <a href="{% url 'notes' %}" class="nav_option">
+            <span class="material-symbols-outlined">
+                description
+            </span>
+            <p>Notes</p>
+        </a>
+        <a href="#" class="nav_option">
+            <span class="material-symbols-outlined">
+                book
+            </span>
+            <p>Books</p>
+        </a>
+        <a href="#" class="nav_option">
+            <span class="material-symbols-outlined">
+                spa
+            </span>
+            <p>Health</p>
+        </a>
+    </div>
+    <div class="last_visited">
+        <hr>
+        <h1>Recent</h1>
+        <a href="#" class="nav_option">
+            <span class="material-symbols-outlined">
+                book
+            </span>
+            <p>Kniha 1</p>
+        </a>
+        <a href="#" class="nav_option">
+            <span class="material-symbols-outlined">
+                school
+            </span>
+            <p>Čeština</p>
+        </a>
+        <a href="#" class="nav_option">
+            <span class="material-symbols-outlined">
+                book
+            </span>
+            <p>Kniha 2</p>
+        </a>
+        <a href="#" class="nav_option">
+            <span class="material-symbols-outlined">
+                book
+            </span>
+            <p>Kniha 3</p>
+        </a>
+        <a href="#" class="nav_option">
+            <span class="material-symbols-outlined">
+                spa
+            </span>
+            <p>Yoga</p>
+        </a>
+    </div>
+    <div class="nav_info">
+        <h1>Made by Matěj Hejtman</h1>
+        <a rel="license" href="http://creativecommons.org/licenses/by-nd/4.0/">
+            <img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nd/4.0/88x31.png" />
+        </a>
+        <br />
+        This work is licensed under a 
+        <a rel="license" href="http://creativecommons.org/licenses/by-nd/4.0/">Creative Commons Attribution-NoDerivatives 4.0 International License</a>
+    </div>
+</nav>

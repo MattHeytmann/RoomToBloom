@@ -1,0 +1,75 @@
+{% extends "index.html" %}
+
+{% block title %}home{% endblock title %}
+
+{% block content %}
+
+<main>
+    <h1>{{ class.title|truncatechars:30 }}</h1>
+
+    <p>{{ class.description|truncatechars:50 }}</p>
+
+    <span class="material-symbols-outlined subject_option" onclick="dropAll(['subject_list', 'options'])">
+        add
+    </span>
+
+    <span class="material-symbols-outlined subject_option back_option" onclick="dropAll(['subject_list', 'options'])">
+        <a href="{% url 'subject_detail' subject.subject_id %}">
+            arrow_back
+        </a>
+    </span>
+
+    <div class="options class_options">
+        <a href="#" class="option option1" onclick="dropSubject('create_section_form')">
+            <span class="material-symbols-outlined">
+                add
+            </span>
+            <p>Add Note</p>
+        </a>
+        <a href="#" class="option option2" onclick="appier('delete_section')">
+            <span class="material-symbols-outlined">
+                delete
+            </span>
+            <p>Delete Note</p>
+        </a>
+    </div>
+    <div class="subject_list">
+
+        {% if notes|length == 0 %}
+            <a class="subject"><h1>Empty</h1></a>
+        {% endif %}
+        
+        {% for note in notes %}
+        <a href="{% url 'note_detail' note.subject_id %}" class="subject">
+            <p class="date">{{ note.created_at|date:'d-m-Y' }}</p>
+            <h1>{{ note.title|truncatechars:20 }}</h1>
+            <p class="editP">{{ note.content|truncatechars:50 }}</p>
+        </a>
+        <a href="{% url 'deleteNote' note.subject_id %}" class="delete_section">
+            <span class="material-symbols-outlined">
+                delete
+            </span>
+        </a>
+        
+        {% endfor %}
+
+    </div>
+    <div class="create_section_form">
+        <form method="post">
+
+            {% csrf_token %}
+        
+            <h1>Create Note</h1>
+        
+            <input type="text" name="title" placeholder="Title" required minlength="1">
+            <textarea name="content" placeholder="Write something..." id="" cols="30" rows="10" required></textarea>
+            <div class="btns">
+                <button type="button" class="closebtn" onclick="dropSubject('create_section_form')">Close</button>
+                <button type="submit" value="create">Create</button>
+            </div>
+        </form>
+    </div>
+</main>
+
+{% endblock content %}
+

@@ -1,0 +1,47 @@
+{% extends "index.html" %}
+
+{% block title %}home{% endblock title %}
+
+{% block content %}
+
+<main>
+    <h1>Flash cards</h1>
+
+    <p>hold on question and see the asnwer</p>
+
+    <span class="material-symbols-outlined subject_option">
+        <a href="{% url 'create_test' type %}">
+            arrow_back
+        </a>
+    </span>
+    <span class="material-symbols-outlined subject_option back_option">
+        <a href="{% url 'test' type %}">
+            refresh
+        </a>
+    </span>
+
+    <div class="subject_list down">
+
+        {% if notes|length == 0 %}
+            <a class="subject"><h1>Empty</h1></a>
+        {% endif %}
+        
+        {% for question in questions %}
+        <a class="subject card" style="transform: none; background-color: #00000000;">
+            <div class="content">
+                <div class="front">
+                    <h1>{{ question.title }}</h1>
+                </div>
+                <div class="back">
+                    <h1 class="edit_answer">{{ question.answer }}</h1>
+                </div>
+            </div>
+            
+        </a>       
+        {% endfor %}
+
+    </div>
+</main>
+
+{% endblock content %}
+

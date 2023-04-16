@@ -1,0 +1,39 @@
+{% extends "index.html" %}
+
+{% block title %}home{% endblock title %}
+
+{% block content %}
+
+<main>
+    <h1>Home</h1>
+
+    <p>Welcome, you can...</p>
+    <div class="options">
+        <a href="#" class="option option1">
+            <span class="material-symbols-outlined">
+                spa
+            </span>
+            <p>Create health plan</p>
+        </a>
+        <a href="#" class="option option2">
+            <span class="material-symbols-outlined">
+                description
+            </span>
+            <p>Create note</p>
+        </a>
+        <a href="{% url 'subject' %}" class="option option3">
+            <span class="material-symbols-outlined">
+                school
+            </span>
+            <p>Create Subject</p>
+        </a>
+        <a href="#" class="option option4">
+            <span class="material-symbols-outlined">
+                book
+            </span>
+            <p>Write a book analysis</p>
+        </a>
+    </div>
+</main>
+
+{% endblock content %}
