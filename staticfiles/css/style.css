@@ -1,0 +1,607 @@
+:root {
+    --main_color: #2364AA;
+    --secondary_color: #2364aaa1;
+    --login_color: #ffffff;
+    --nav_color: white;
+    --wrong: #DA3E52 ;
+    --good: #679436;
+}
+
+* {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+
+body {
+    height: 100vh;
+    font-family: 'Dosis', sans-serif;
+    background-color: var(--main_color);
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+  
+.sky {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 100vh;
+    background: var(--main_color);
+    overflow: hidden;
+    z-index: -999;
+    transition: all 2s;
+}
+
+.sky .air{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100px;
+    background: url(https://1.bp.blogspot.com/-xQUc-TovqDk/XdxogmMqIRI/AAAAAAAACvI/AizpnE509UMGBcTiLJ58BC6iViPYGYQfQCLcBGAsYHQ/s1600/wave.png);
+    background-size: 1000px 100px;
+    filter: blur(20px);
+}
+.sky .air.air1{
+    animation: wave 30s linear infinite;
+    z-index: 1000;
+    opacity: 1;
+    animation-delay: 0s;
+    bottom: 0;
+}
+.sky .air.air2{
+    animation: wave2 15s linear infinite;
+    z-index: 999;
+    opacity: 0.5;
+    animation-delay: -5s;
+    bottom: 10px;
+}
+.sky .air.air3{
+    animation: wave 30s linear infinite;
+    z-index: 998;
+    opacity: 0.2;
+    animation-delay: -2s;
+    bottom: 15px;
+}
+.sky .air.air4{
+    animation: wave2 5s linear infinite;
+    z-index: 997;
+    opacity: 0.7;
+    animation-delay: -5s;
+    bottom: 20px;
+}
+@keyframes wave{
+    0%{
+      background-position-x: 0px; 
+    }
+    100%{
+      background-position-x: 1000px; 
+    }
+}
+@keyframes wave2{
+    0%{
+      background-position-x: 0px; 
+    }
+    100%{
+      background-position-x: -1000px; 
+    }
+}
+
+nav {
+    position: fixed;
+    background-color: var(--nav_color);
+    width: 200px;
+    height: 100vh;
+    box-shadow: 0px 0px 15px 0px #000000bf;
+    z-index: 999;
+}
+
+nav h1 {
+    color: var(--main_color);
+}
+
+.user {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+}
+
+.user > h1 {
+    padding: 0px 10px;
+}
+
+.log_out_user {
+    display: flex;
+    justify-content: center;
+    position: relative;
+    top: -5px;
+}
+
+form {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.log_in_div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--login_color);
+    box-shadow: 0px 0px 20px 0px #000000bf;
+    height: fit-content;
+    aspect-ratio: 3 / 4;
+    border-radius: 1rem;
+    padding: 1%;
+}
+
+form input, button, textarea {
+    background: none;
+    border: black 1px solid;
+    font-size: large;
+    margin: 10px;
+    padding: 5px 10px;
+    outline: none;
+    border-radius: 1rem;
+}
+
+form button {
+    border: none;
+    background-color: var(--main_color);
+    color: white;
+    cursor: pointer;
+}
+
+.forgotten_password {
+    font-size: small;
+}
+
+form h1, form p {
+    margin: 10px;
+    font-weight: 600;
+    color: var(--main_color);
+}
+
+form .material-symbols-outlined {
+    font-size: 5rem;
+    color: var(--main_color);
+}
+
+nav hr {
+    border-color: var(--main_color);
+    opacity: 0.4;
+}
+
+.nav_options, .last_visited {
+    margin: 10px;
+}
+
+.nav_options > *, .last_visited > * {
+    margin: 5px 0px;
+}
+
+.nav_option {
+    display: flex;
+    align-items: center;
+    background-color: var(--secondary_color);
+    color: white;
+    padding: 5px 5px;
+    border-radius: 1rem;
+    transition: all 0.2s;
+    cursor: pointer;
+}
+
+.nav_option:hover {
+    background-color: var(--main_color);
+}
+
+.nav_option > p {
+    margin-left: 5px;
+}
+
+.nav_info {
+    position: absolute;
+    max-width: 200px;
+    bottom: 10px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+    font-size: xx-small;
+    opacity: 0.1;
+    transition: all 0.5s;
+}
+
+.nav_info:hover {
+    opacity: 0.5;
+}
+
+.nav_info > * {
+    margin: 5px;
+}
+
+.burger {
+    display: none;
+    font-size: 30px;
+    font-weight: 900;
+    color: var(--main_color);
+    position: absolute;
+    background-color: white;
+    left: 200px;
+    padding: 5px;
+    border-bottom-right-radius: 1rem;
+    box-shadow: 0px 0px 5px 5px #00000028;
+}
+
+main {
+    position: absolute;
+    right: 0px;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: calc(100vw - 200px);
+}
+
+.option1 {
+    grid-area: option1;
+}
+
+.option2 {
+    grid-area: option2;
+}
+
+.option3 {
+    grid-area: option3;
+}
+
+.option4 {
+    grid-area: option4;
+}
+
+.options {
+    display: grid;
+    grid-template-columns: 20% 20% 20% 20% 20%;
+    grid-template-rows: auto;
+    grid-template-areas: 
+    "option1 option1 option1 option2 option2"
+    "option3 option3 option4 option4 option4";
+    gap: 10px;
+    width: 80vw;
+    max-width: 400px;
+    margin-left: -40px;
+    margin-top: 10px;
+}
+
+.option {
+    background: white;
+    color: black;
+    width: 100%;
+    padding: 30px 20px;
+    border-radius: 1rem;
+    text-align: center;
+    transition: all 0.3s;
+    cursor: pointer;
+    box-shadow: 0px 10px 5px 0px #00000028;
+}
+
+.option:hover {
+    transform: scale(1.05);
+}
+
+.option span {
+    color: var(--main_color);
+}
+
+.subject_option {
+    background-color: #ffffff;
+    width: 30px;
+    height: 30px;
+    color: var(--main_color);
+    font-size: 30px;
+    font-weight: 900;
+    border-radius: 1rem;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    transition: all 0.1s;
+    box-shadow: 0px 10px 5px 0px #00000028;
+}
+
+.subject_option:active {
+    transform: scale(1.1);
+}
+
+.class_options {
+    position: relative;
+    top: -500px;
+    transition: all 0.5s;
+}
+
+.subject_list {
+    position: relative;
+    top: -100px;
+    background-color: #ffffff23;
+    padding: 10px;
+    margin: 10px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end;
+    border-radius: 1rem;
+    transition: all 0.5s;
+    max-width: 400px;
+}
+
+.subject_list > .subject {
+    background-color: white;
+    color: var(--main_color);
+    width: 100%;
+    text-align: center;
+    border-radius: 1rem;
+    padding: 10px;
+    margin: 10px 0px;
+    transition: all 0.3s;
+    box-shadow: 0px 10px 5px 0px #00000028;
+    position: relative;
+}
+
+.subject_list > a:hover {
+    transform: scale(1.1);
+}
+
+.delete_section {
+    background: var(--wrong);
+    padding: 10px;
+    margin-bottom: -48px;
+    width: fit-content;
+    height: fit-content;
+    border-radius: 1rem;
+    position: relative;
+    top: -45px;
+    right: -10px;
+    display: none;
+    box-shadow: 0px 0px 5px 0px #00000028;
+    transition: all 0.3s;
+    border: white 1px solid;
+    align-items: center;
+    justify-content: center;
+}
+
+.edit_question {
+    top: -90px;
+    background-color: var(--good);
+}
+
+.create_section_form {
+    position: absolute;
+    top: -500px;
+    background-color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 1rem;
+    box-shadow: 0px 10px 15px 0px #0000007c;
+    transition: all 0.3s;
+    
+}
+
+.create_section_form > form {
+    height: fit-content;
+    padding: 10px;
+    margin: 10px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.5s;
+    max-width: 400px;
+}
+
+.edit_question_form {
+    z-index: 1002;
+    position: absolute;
+    right: 3.7%;
+}
+
+.back_option {
+    right: 50px;
+}
+
+.edit_option {
+    right: 90px;
+}
+
+.date {
+    opacity: 0.6;
+}
+
+.note_hr {
+    margin: 5px 0px;
+    border-color: var(--main_color);
+    opacity: 0.8;
+}
+
+.p_hr {
+    margin: 0px 0px 2px 0px;
+    border-color: var(--main_color);
+    opacity: 0.3;
+}
+
+.closebtn {
+    background-color: var(--wrong);
+}
+
+.justify{
+    text-align: justify;
+}
+
+label {
+    color: var(--main_color);
+    font-size: 10px;
+}
+
+.test_form {
+    height: fit-content;
+}
+
+.more_up {
+    top: -800px;
+}
+
+.hide {
+    display: flex;
+}
+
+.create_subject_down {
+    top: 200px;
+}
+
+.down {
+    top: 50px;
+}
+
+.down_test {
+    top: 20px;
+}
+
+.down_zero {
+    top: 0px;
+}
+
+b {
+    text-decoration: underline;
+}
+
+.question_p {
+    text-align: center;
+    font-size: 10px;
+    margin: 1px;
+    opacity: 0.4;
+}
+
+.question_option {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: fit-content;
+}
+
+.question_option > input{
+    margin: 5px;
+}
+
+.card, .test_card {
+    width: 300px;
+    height: 300px;
+    margin: -150px;
+    float: left;
+    perspective: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .content {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    box-shadow: 0 0 15px rgba(0,0,0,0.1);
+    transition: transform 1s;
+    transform-style: preserve-3d;
+    background-color: #00000000;
+  }
+  
+  .card:active .content {
+    transform: rotateY( 180deg ) ;
+    transition: transform 0.5s;
+}
+
+.test_card_active .content{
+    transform: rotateY( 180deg ) ;
+    transition: transform 0.5s;
+  }
+  
+  .front,
+  .back {
+    position: absolute;
+    height: fit-content;
+    width: 100%;
+    height: 300px;
+    text-align: center;
+    border-radius: 1rem;
+    backface-visibility: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .front {
+    background-color: white;
+  }
+  
+  .back {
+    background: var(--main_color);
+    color: white;
+    transform: rotateY( 180deg );
+  }
+
+.content h1 {
+    width: 300px;
+}
+
+.test_input_check {
+    background-color: var(--main_color);
+    color: white;
+    cursor: pointer;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 1rem;
+    font-size: x-large;
+
+}
+
+.correct {
+    color: var(--good);
+}
+
+.wrong {
+    color: var(--wrong);
+} 
+
+@media screen and (max-width: 750px) {
+    main {
+        padding: 10px;
+        width: 100vw;
+    }
+
+    nav {
+        position: fixed;
+        left: -200px;
+        transition: all 0.5s;
+    }
+
+    .burger {
+        display: inline;
+    }
+
+    .open {
+        left: 0px;
+    }
+
+    .edit_question_form {
+        right: -2px;
+    }
+}
+
